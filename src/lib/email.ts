@@ -46,7 +46,7 @@ function blocNotification(type: string, contenu: string): string {
   return `
     <tr>
       <td style="padding: 10px;">
-        <span style="display:inline-block; background:#EAF3DE; color:#2E7D32; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px;">
+        <span style="display:inline-block; background:#F1E7D0; color:#8a6d1f; font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px; margin-bottom:8px;">
           ${type}
         </span>
         <div style="margin-top:8px; line-height:1.6;">${contenu}</div>
@@ -255,47 +255,9 @@ export async function envoyerZoneApprouvee(params: { destinataire: string; ville
   }
 }
 
-export async function envoyerAlerteRetourStock(params: { destinataire: string; nomProduit: string; slug: string }) {
-  const { destinataire, nomProduit, slug } = params;
-  try {
-    const resultat = await emailjs.send(process.env.EMAILJS_SERVICE_ID!, process.env.EMAILJS_TEMPLATE_ID_CLIENT!, {
-      to_email: destinataire,
-      titre: "📦 De retour en stock !",
-      message_intro: `<strong>${echapperHtml(nomProduit)}</strong> est de nouveau en stock. <a href="${process.env.NEXT_PUBLIC_SITE_URL}/produit/${slug}" style="color:#2E7D32;">Voir le produit →</a>`,
-      numero: "",
-      total: "",
-      lignes: "",
-    });
-    console.log("[email] Alerte retour stock envoyée :", resultat.status, destinataire);
-  } catch (error) {
-    console.error("[email] Erreur d'envoi (retour stock) :", error);
-  }
-}
 
-export async function envoyerAlerteStockBas(params: { nomProduit: string; stockActuel: number; seuil: number }) {
-  const { nomProduit, stockActuel, seuil } = params;
-  if (!process.env.ADMIN_EMAIL) return;
 
-  try {
-    const resultat = await emailjs.send(process.env.EMAILJS_SERVICE_ID!, process.env.EMAILJS_TEMPLATE_ID_ADMIN!, {
-      to_email: process.env.ADMIN_EMAIL,
-      titre: "⚠️ Stock bas",
-      numero: "—",
-      total: "—",
-      lignes: blocNotification(
-        "ALERTE STOCK",
-        `<strong>${echapperHtml(nomProduit)}</strong> n'a plus que <strong>${stockActuel}</strong> unité(s) en stock (seuil configuré : ${seuil}).`
-      ),
-      client_nom: "—",
-      client_telephone: "—",
-      client_email: "—",
-      adresse_livraison: "—",
-    });
-    console.log("[email] Alerte stock bas envoyée :", resultat.status);
-  } catch (error) {
-    console.error("[email] Erreur d'envoi (stock bas) :", error);
-  }
-}
+   
 
 // src/lib/email.ts
 // Ajout à la fin du fichier existant : envoi du lien de réinitialisation.
@@ -307,7 +269,7 @@ export async function envoyerLienReinitialisation(params: { destinataire: string
     const resultat = await emailjs.send(process.env.EMAILJS_SERVICE_ID!, process.env.EMAILJS_TEMPLATE_ID_CLIENT!, {
       to_email: destinataire,
       titre: "🔑 Réinitialisation de mot de passe",
-      message_intro: `Vous avez demandé à réinitialiser votre mot de passe. <a href="${lien}" style="color:#2E7D32; font-weight:600;">Cliquez ici pour choisir un nouveau mot de passe</a>. Ce lien expire dans 1 heure. Si vous n'êtes pas à l'origine de cette demande, ignorez simplement cet e-mail.`,
+      message_intro: `Vous avez demandé à réinitialiser votre mot de passe. <a href="${lien}" style="color:#8a6d1f; font-weight:600;">Cliquez ici pour choisir un nouveau mot de passe</a>. Ce lien expire dans 1 heure. Si vous n'êtes pas à l'origine de cette demande, ignorez simplement cet e-mail.`,
       numero: "",
       total: "",
       lignes: "",

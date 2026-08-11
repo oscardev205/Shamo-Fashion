@@ -20,7 +20,7 @@ export function Footer() {
             {/* Fond marine ici : dépose une variante claire/blanche du logo dans
                 /public/logo-shamo-blanc.png (celle du header peut être colorée,
                 elle est sur fond clair). */}
-            <Image src="/logo-shamo-blanc.png" alt="Grace Débordée — Shamo Fashion" width={150} height={46} className="h-9 w-auto" />
+            <Image src="/logo-shamo.png" alt="Grace Débordée — Shamo Fashion" width={150} height={46} className="h-9 w-auto" />
             <p className="mt-2 font-accent text-2xl text-white/80">Votre élégance, notre priorité</p>
             <div className="mt-4 flex gap-3">
               {/* TODO: remplacer par les vrais liens Facebook / Instagram / TikTok de Shamo Fashion */}

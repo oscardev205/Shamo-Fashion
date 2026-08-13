@@ -9,7 +9,7 @@ import Image from "next/image";
 import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa6";
 import { NewsletterForm } from "@/components/layout/NewsletterForm";
 
-const LIEN_MAPS_BOUTIQUE = "https://www.google.com/maps/search/?api=1&query=Godomey%2C+B%C3%A9nin";
+const LIEN_MAPS_BOUTIQUE = "https://maps.app.goo.gl/FndjxVqocSWZ28QP8";
 
 export function Footer() {
   return (

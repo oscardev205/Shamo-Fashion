@@ -6,6 +6,7 @@
 // et le lien Maps par un pin précis si tu en as un.
 
 import type { Metadata } from "next";
+import { GaleriePhotosBoutique } from "@/components/apropos/GaleriePhotosBoutique";
 import Link from "next/link";
 import { FaGem, FaAward, FaCrown, FaShirt, FaScissors, FaMagnifyingGlass, FaBoxOpen, FaTruckFast, FaStar, FaLocationDot } from "react-icons/fa6";
 import { TraitFeuille } from "@/components/ui/TraitFeuille";
@@ -13,8 +14,23 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { prisma } from "@/lib/prisma";
 
-const LIEN_MAPS_EMBED = "https://www.google.com/maps?q=Godomey,B%C3%A9nin&output=embed";
-const LIEN_MAPS = "https://www.google.com/maps/search/?api=1&query=Godomey%2C+B%C3%A9nin";
+// TODO: remplacer ces deux liens par ceux de la position EXACTE de la boutique
+// (actuellement ils pointent juste sur "Godomey" en général, pas sur l'adresse précise).
+// Comment récupérer les bons liens sur Google Maps :
+// 1. Ouvre Google Maps, cherche/place le point exact de ta boutique.
+// 2. Clique sur "Partager" > onglet "Intégrer une carte" > copie l'URL qui est dans
+//    src="..." de la balise <iframe> proposée -> colle-la dans LIEN_MAPS_EMBED.
+// 3. Toujours dans "Partager", mais l'onglet "Envoyer le lien" -> copie ce lien-là
+//    -> colle-le dans LIEN_MAPS (c'est celui utilisé par le bouton "Ouvrir dans Google Maps").
+const LIEN_MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3965.0893225551795!2d2.3342989749916905!3d6.382471693607886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjInNTYuOSJOIDLCsDIwJzEyLjgiRQ!5e0!3m2!1sen!2sbj!4v1786622491202!5m2!1sen!2sbj";
+const LIEN_MAPS = "https://maps.app.goo.gl/FndjxVqocSWZ28QP8";
+// TODO: remplace ces 3 fichiers par tes vraies photos de la boutique, en gardant
+// exactement les mêmes noms (ou alors change les noms ici ET dans /public).
+// PHOTO_PRINCIPALE : vitrine ou intérieur, format large (paysage).
+// PHOTO_SECONDAIRE_1 / 2 : deux autres angles (rayons, présentoirs, façade...), format carré.
+const PHOTO_PRINCIPALE = "/boutique-1.jpg";
+const PHOTO_SECONDAIRE_1 = "/boutique-2.jpg";
+const PHOTO_SECONDAIRE_2 = "/boutique-3.jpg";
 
 export const metadata: Metadata = {
   title: "À propos",
@@ -187,13 +203,14 @@ export default async function AProposPage() {
         </FadeIn>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <FadeIn className="carte-3d overflow-hidden">
-            {/* TODO: remplacer cette image par une vraie photo de la boutique (vitrine/intérieur) */}
-            <div className="flex aspect-[4/3] w-full items-center justify-center bg-vert-pale">
-              <span className="px-6 text-center text-xs text-encre/40">
-                Photo de la boutique à venir
-              </span>
-            </div>
+         <FadeIn>
+            <GaleriePhotosBoutique
+              photoPrincipale={{ src: PHOTO_PRINCIPALE, alt: "Vitrine de la boutique Shamo Fashion à Godomey" }}
+              photosSecondaires={[
+                { src: PHOTO_SECONDAIRE_1, alt: "Intérieur de la boutique Shamo Fashion, présentation des articles" },
+                { src: PHOTO_SECONDAIRE_2, alt: "Sélection de vêtements et accessoires en boutique chez Shamo Fashion" },
+              ]}
+            />
           </FadeIn>
 
           <FadeIn delai={100} className="carte-3d flex flex-col p-5">

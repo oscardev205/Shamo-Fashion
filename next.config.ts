@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       "img-src 'self' data: https://*.tile.openstreetmap.org https://*.public.blob.vercel-storage.com",
       "font-src 'self' data:",
       "connect-src 'self' https://*.kkiapay.me",
-      "frame-src 'self' https://*.kkiapay.me",
+      "frame-src 'self' https://*.kkiapay.me https://www.google.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",

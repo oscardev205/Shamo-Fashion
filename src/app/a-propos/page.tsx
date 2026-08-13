@@ -5,6 +5,7 @@
 // TODO: remplacer l'encart "Photo de la boutique à venir" par une vraie photo,
 // et le lien Maps par un pin précis si tu en as un.
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { FaGem, FaAward, FaCrown, FaShirt, FaScissors, FaMagnifyingGlass, FaBoxOpen, FaTruckFast, FaStar, FaLocationDot } from "react-icons/fa6";
 import { TraitFeuille } from "@/components/ui/TraitFeuille";
@@ -14,6 +15,14 @@ import { prisma } from "@/lib/prisma";
 
 const LIEN_MAPS_EMBED = "https://www.google.com/maps?q=Godomey,B%C3%A9nin&output=embed";
 const LIEN_MAPS = "https://www.google.com/maps/search/?api=1&query=Godomey%2C+B%C3%A9nin";
+
+export const metadata: Metadata = {
+  title: "À propos",
+  description: "Shamo Fashion, boutique de mode masculine haut de gamme à Godomey : costumes, chemises, chaussures et accessoires sélectionnés avec exigence.",
+  alternates: {
+    canonical: "/a-propos",
+  },
+};
 
 export default async function AProposPage() {
   const [nombreProduits, nombreCategories, statsAvis] = await Promise.all([

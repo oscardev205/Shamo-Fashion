@@ -6,10 +6,17 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { SITE_URL } from "@/lib/seo";
 
+// Sans ça, Next.js génère ce fichier une seule fois au moment du build et le
+// fige ("Static") — les nouveaux produits/articles ajoutés après le déploiement
+// n'apparaîtraient jamais dans le sitemap sans un nouveau déploiement complet.
+// Ici, on force une régénération automatique toutes les heures.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [produits, categories] = await Promise.all([
+  const [produits, categories, articles] = await Promise.all([
     prisma.product.findMany({ where: { actif: true }, select: { slug: true, updatedAt: true } }),
     prisma.category.findMany({ select: { slug: true } }),
+    prisma.post.findMany({ where: { publie: true }, select: { slug: true, updatedAt: true } }),
   ]);
 
   const pagesStatiques: MetadataRoute.Sitemap = [
@@ -36,5 +43,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...pagesStatiques, ...pagesCategories, ...pagesProduits];
+  const pagesArticles: MetadataRoute.Sitemap = articles.map((a) => ({
+    url: `${SITE_URL}/blog/${a.slug}`,
+    lastModified: a.updatedAt,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...pagesStatiques, ...pagesCategories, ...pagesProduits, ...pagesArticles];
 }

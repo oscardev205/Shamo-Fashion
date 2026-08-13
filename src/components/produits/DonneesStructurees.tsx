@@ -4,7 +4,7 @@
 // à Google d'afficher prix/note/disponibilité directement dans les résultats
 // de recherche (rich snippets).
 
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, SITE_NAME } from "@/lib/seo";
 
 type Props = {
   nom: string;
@@ -13,6 +13,7 @@ type Props = {
   prixMin: number;
   categorieNom: string;
   categorieSlug: string;
+  imageUrl?: string;
   noteMoyenne?: number;
   nombreAvis?: number;
 };
@@ -24,6 +25,7 @@ export function DonneesStructurees({
   prixMin,
   categorieNom,
   categorieSlug,
+  imageUrl,
   noteMoyenne,
   nombreAvis,
 }: Props) {
@@ -34,6 +36,11 @@ export function DonneesStructurees({
         "@type": "Product",
         name: nom,
         description,
+        ...(imageUrl ? { image: [imageUrl] } : {}),
+        brand: {
+          "@type": "Brand",
+          name: SITE_NAME,
+        },
         offers: {
           "@type": "Offer",
           priceCurrency: "XOF",

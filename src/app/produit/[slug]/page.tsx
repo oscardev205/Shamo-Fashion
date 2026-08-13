@@ -70,6 +70,7 @@ export default async function ProduitPage({
         prixMin={prixMin}
         categorieNom={produit.category.nom}
         categorieSlug={produit.category.slug}
+        imageUrl={produit.images[0]?.url}
         noteMoyenne={statsAvis._avg.note ?? undefined}
         nombreAvis={statsAvis._count || undefined}
       />

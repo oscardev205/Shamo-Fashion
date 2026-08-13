@@ -9,7 +9,8 @@ import { CartProvider } from "@/context/CartContext";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { ThemeScript } from "@/components/providers/ThemeScript";
 import { SessionProviderWrapper } from "@/components/providers/SessionProviderWrapper";
-import { SITE_URL } from "@/lib/seo";
+import { DonneesStructureesOrganisation } from "@/components/seo/DonneesStructureesOrganisation";
+import { SITE_URL, IMAGE_PARTAGE_DEFAUT } from "@/lib/seo";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -43,11 +44,13 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     title: "Grace Débordée — Shamo Fashion",
     description: "Costumes, chemises, chaussures et accessoires haut de gamme pour homme.",
+    images: [{ url: IMAGE_PARTAGE_DEFAUT }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Grace Débordée — Shamo Fashion",
     description: "Votre élégance, notre priorité.",
+    images: [IMAGE_PARTAGE_DEFAUT],
   },
   robots: { index: true, follow: true },
   verification: {
@@ -64,6 +67,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <ThemeScript />
+        <DonneesStructureesOrganisation />
       </head>
       <body className={`${poppins.variable} ${greatVibes.variable} ${playfair.variable} flex min-h-screen flex-col font-sans antialiased`}>
         <ThemeProvider>

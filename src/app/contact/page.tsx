@@ -2,6 +2,7 @@
 // Ajout : numéro de téléphone cliquable (appel direct) et WhatsApp direct
 // (conversation individuelle, différent du groupe et de la chaîne).
 
+import type { Metadata } from "next";
 import {
   FaFacebook,
   FaInstagram,
@@ -12,6 +13,14 @@ import {
 } from "react-icons/fa6";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { TraitFeuille } from "@/components/ui/TraitFeuille";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description: "Contactez Shamo Fashion : formulaire, téléphone, WhatsApp, e-mail et réseaux sociaux. Boutique de mode masculine à Godomey.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default function ContactPage() {
   return (
@@ -37,7 +46,7 @@ export default function ContactPage() {
         {/* Coordonnées et réseaux */}
         <div className="space-y-3">
           <a
-            href="tel:+22900000000"
+            href="tel:+22996565322"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-vert-pale text-vivrebio-vert">
@@ -55,7 +64,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://wa.me/22900000000"
+            href="https://wa.me/22996565322"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
@@ -93,7 +102,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://facebook.com/vivrebio"
+            href="https://www.facebook.com/share/194XuUG34H/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
@@ -113,7 +122,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://instagram.com/vivrebio"
+            href="https://instagram.com/shamofashion"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
@@ -133,7 +142,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://tiktok.com/@shamofashion"
+            href="https://tiktok.com/@graceduplexeakoho"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
@@ -153,7 +162,7 @@ export default function ContactPage() {
           </a>
 
           <a
-            href="https://chat.whatsapp.com/votre-lien-de-groupe"
+            href="https://chat.whatsapp.com/DS3fjSI6dpc78nu4rXc0Fb?s=cl&p=a&mlu=0&amv=0"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
@@ -172,25 +181,6 @@ export default function ContactPage() {
             </div>
           </a>
 
-          <a
-            href="https://whatsapp.com/channel/votre-lien-de-chaine"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-xl border border-sable p-3.5 transition hover:border-vivrebio-vert"
-          >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-vert-pale text-vivrebio-vert">
-              <FaWhatsapp size={15} />
-            </span>
-
-            <div>
-              <p className="text-sm font-medium text-encre">
-                Chaîne WhatsApp
-              </p>
-              <p className="text-xs text-encre/50">
-                Recevez nos actualités et promotions
-              </p>
-            </div>
-          </a>
         </div>
       </div>
     </main>

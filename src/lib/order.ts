@@ -6,5 +6,5 @@ import { randomBytes } from "crypto";
 export function genererNumeroCommande(): string {
   const annee = new Date().getFullYear();
   const code = randomBytes(4).toString("hex").toUpperCase().slice(0, 6);
-  return `VB-${annee}-${code}`;
+  return `SF-${annee}-${code}`;
 }

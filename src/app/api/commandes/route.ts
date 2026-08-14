@@ -2,14 +2,14 @@
 // Fichier complet : le panier référence des variantes (variantId) et non plus
 // des produits à prix unique. Plus de gestion de stock : la décrémentation du
 // stock et l'email d'alerte stock bas ont été retirés (Grace Débordée ne suit
-// pas de stock).
+// pas de stock). Les frais de livraison ne sont plus calculés/vérifiés ici :
+// ils sont réglés directement au livreur, en espèces.
 
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { genererNumeroCommande } from "@/lib/order";
-import { getFraisLivraison } from "@/lib/livraison";
 import { estFideliteActive } from "@/lib/parametres";
 import { getValeurPointFcfa } from "@/lib/fidelite";
 
@@ -62,15 +62,18 @@ export async function POST(request: Request) {
   }
 
   let adresseId: string | undefined;
-  let fraisLivraison = 0;
+  // Les frais de livraison ne sont plus calculés/facturés sur le site : ils
+  // sont réglés directement au livreur, en espèces, à la livraison. On garde
+  // le champ fraisLivraison en base (toujours à 0) pour ne pas casser tout ce
+  // qui l'affiche déjà (facture, récap commande...), mais on ne le calcule
+  // plus et on n'empêche plus une commande selon la ville.
+  const fraisLivraison = 0;
 
   if (modeLivraison === "RETRAIT") {
     if (!contactNom || !contactTelephone) {
       return NextResponse.json({ erreur: "Nom et téléphone requis pour le retrait" }, { status: 400 });
     }
   } else {
-    let villeLivraison: string;
-
     if (addressId) {
       if (!userId) return NextResponse.json({ erreur: "Non autorisé" }, { status: 403 });
       const adresseExistante = await prisma.address.findUnique({ where: { id: addressId } });
@@ -78,27 +81,14 @@ export async function POST(request: Request) {
         return NextResponse.json({ erreur: "Adresse introuvable" }, { status: 404 });
       }
       adresseId = adresseExistante.id;
-      villeLivraison = adresseExistante.ville;
     } else if (adresse) {
       const nouvelleAdresse = await prisma.address.create({
         data: { ...adresse, userId: userId ?? undefined },
       });
       adresseId = nouvelleAdresse.id;
-      villeLivraison = adresse.ville;
     } else {
       return NextResponse.json({ erreur: "Adresse manquante" }, { status: 400 });
     }
-
-    const resultatFrais = await getFraisLivraison(villeLivraison);
-    if (!resultatFrais.zoneTrouvee) {
-      return NextResponse.json(
-        {
-          erreur: `Nous ne livrons pas encore à ${villeLivraison}. Choisissez le retrait en boutique ou envoyez une demande de couverture.`,
-        },
-        { status: 400 }
-      );
-    }
-    fraisLivraison = resultatFrais.frais;
   }
 
   const variantsIds = items.map((i) => i.variantId);

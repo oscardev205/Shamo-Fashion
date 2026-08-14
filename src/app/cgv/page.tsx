@@ -27,9 +27,10 @@ export default function CGVPage() {
         <section>
           <h2 className="mb-2 text-base font-semibold text-encre">Livraison</h2>
           <p>
-            Les délais et frais de livraison sont indiqués lors du passage de commande et varient selon
-            la zone géographique. Voir notre page Livraison pour le détail.
-          </p>
+  Les frais de livraison ne sont pas facturés sur le site : ils sont réglés directement
+  au livreur, en espèces, au moment de la livraison, selon la distance. Voir notre page
+  Livraison pour le détail.
+</p>
         </section>
 
         <section>

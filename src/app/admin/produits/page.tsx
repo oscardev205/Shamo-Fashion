@@ -40,17 +40,17 @@ export default async function AdminProduitsPage({
           href="/admin/produits/nouveau"
           className="shrink-0 rounded-lg bg-vivrebio-vert px-4 py-2 text-center text-sm font-medium text-white"
         >
-          + Nouveau produit
+          + Nouvel article
         </Link>
       </div>
 
-      <p className="mb-2 text-xs text-encre/40">{produits.length} produit(s)</p>
+      <p className="mb-2 text-xs text-encre/40">{produits.length} article(s)</p>
 
       <div className="overflow-x-auto rounded-xl border border-sable">
         <table className="w-full min-w-[640px] text-sm">
           <thead>
             <tr className="border-b border-sable bg-vert-pale text-left text-xs text-encre/60">
-              <th className="p-3">Produit</th>
+              <th className="p-3">Article</th>
               <th className="p-3">Catégorie</th>
               <th className="p-3">Prix</th>
               <th className="p-3">Statut</th>
@@ -74,7 +74,7 @@ export default async function AdminProduitsPage({
               </tr>
             ))}
             {produits.length === 0 && (
-              <tr><td colSpan={5} className="p-6 text-center text-encre/40">Aucun produit trouvé.</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-encre/40">Aucun article trouvé.</td></tr>
             )}
           </tbody>
         </table>

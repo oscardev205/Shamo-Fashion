@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard, Package, ClipboardList, Tag, MapPinned, MapPinPlus,
+  LayoutDashboard, Package, ClipboardList, Tag,
   Mail, Newspaper, CircleHelp, Gift, Users,
 } from "lucide-react";
 import { BadgeMessages } from "@/components/admin/BadgeMessages";
@@ -14,8 +14,6 @@ const liens = [
   { href: "/admin/produits", label: "Produits", icon: Package },
   { href: "/admin/commandes", label: "Commandes", icon: ClipboardList, badge: true },
   { href: "/admin/promos", label: "Codes promo", icon: Tag },
-  { href: "/admin/zones-livraison", label: "Zones de livraison", icon: MapPinned },
-  { href: "/admin/demandes-livraison", label: "Demandes de zones", icon: MapPinPlus },
   { href: "/admin/utilisateurs", label: "Utilisateurs", icon: Users },
   { href: "/admin/fidelite", label: "Fidélité", icon: Gift },
   { href: "/admin/blog", label: "Blog", icon: Newspaper },

@@ -223,7 +223,7 @@ model Post {
   extrait   String
   contenu   String
   publie    Boolean  @default(false)
-  auteur    String   @default("Vivre Bio")
+  auteur    String   @default("Shamo Fashion")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -243,17 +243,7 @@ model FaqItem {
 }
 
 
-// Ajout : DeliveryZone (frais par ville), StockAlert (alerte disponibilité),
-// et un champ seuilAlerte sur Product (notification admin si stock bas).
 
-model DeliveryZone {
-  id          String   @id @default(cuid())
-  ville       String   @unique
-  frais       Int
-  delaiEstime String?
-  actif       Boolean  @default(true)
-  createdAt   DateTime @default(now())
-}
 
 // prisma/schema.prisma
 // Ajout : solde de points sur User, historique des transactions (gain/utilisation),
@@ -287,21 +277,9 @@ enum ModeLivraison {
   RETRAIT
 }
 
-enum DemandeLivraisonStatut {
-  EN_ATTENTE
-  APPROUVEE
-  REFUSEE
-}
 
-model DeliveryRequest {
-  id        String                  @id @default(cuid())
-  ville     String
-  nom       String
-  telephone String
-  email     String?
-  statut    DemandeLivraisonStatut  @default(EN_ATTENTE)
-  createdAt DateTime                @default(now())
-}
+
+
 
 model OrderItem {
   id               String         @id @default(cuid())

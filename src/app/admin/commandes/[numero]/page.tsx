@@ -143,7 +143,7 @@ export default async function AdminDetailCommandePage({
 
         <div className="flex justify-between text-encre/60">
           <span>{commande.modeLivraison === "RETRAIT" ? "Retrait" : "Livraison"}</span>
-          <span>{commande.fraisLivraison === 0 ? "Gratuit" : formatPrix(commande.fraisLivraison)}</span>
+          <span>{commande.modeLivraison === "RETRAIT" ? "Gratuit" : "À régler au livreur"}</span>
         </div>
 
         <div className="flex justify-between border-t border-sable pt-1.5 text-base font-semibold text-encre">

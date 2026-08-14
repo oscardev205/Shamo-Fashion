@@ -114,7 +114,7 @@ export function FactureDocument({
           )}
           <View style={styles.ligneTotal}>
             <Text>{modeLivraison === "RETRAIT" ? "Retrait" : "Livraison"}</Text>
-            <Text>{fraisLivraison === 0 ? "Gratuit" : formatPrix(fraisLivraison)}</Text>
+            <Text>{modeLivraison === "RETRAIT" ? "Gratuit" : "À régler au livreur"}</Text>
           </View>
           <View style={styles.ligneTotalFinal}>
             <Text style={styles.totalFinalTexte}>Total</Text>
